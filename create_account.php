@@ -6,6 +6,8 @@
 
         <meta charset="UTF-8">
 
+        <script type="text/javascript" src="new_account_submit.js"></script>
+        
         <link rel="stylesheet" type="text/css" href="layout.css">
         
     </head>
@@ -13,7 +15,7 @@
     <body>
         <div><h2>Create Account</h2></div>
         
-        <div><form action="signup_confirm.php" method="POST">
+        <div><form action="signup_confirm.php" onsubmit="return submit();" method="POST">
             <table>
                 <tr>
                     <td>
