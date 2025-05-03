@@ -20,20 +20,22 @@
     <body>
         <div><h1>Conway's Game of Life</h1></div>
         
-        <form action="user_page.php" method="POST">
-            <label for="username">Username</label>
+        <div><form action="user_page.php" method="POST">
+            <label for="username">Username</label><br>
             
-            <input type="text" id="username" name="username">
+            <input type="text" id="username" name="username" required><br>
             
-            <label for="password">Password</label>
+            <label for="password">Password</label><br>
             
-            <input type="text" id="password" name="password">
+            <input type="password" id="password" name="password" required><br>
             
             <input type="submit" value="Enter Simulation">
             
-        </form>
+        </form></div>
         
-        <button type="button" onclick="window.location.assign('create_account.php')">
+        <div><button type="button" onclick="window.location.assign('create_account.php')">
+            Create Account
+        </button></div>
     
     </body>
     
