@@ -1,6 +1,6 @@
 <?php
     // When adding to your CODD files, use youe GSU Username
-    $db_username = "jngui1";
+    $db_username = "username";
     
     $conn = new mysqli("localhost", $db_username, $db_username, $db_username);
     
