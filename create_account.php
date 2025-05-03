@@ -6,8 +6,6 @@
 
         <meta charset="UTF-8">
 
-        <script type="text/javascript" src="new_account_submit.js"></script>
-        
         <link rel="stylesheet" type="text/css" href="layout.css">
         
     </head>
@@ -15,7 +13,7 @@
     <body>
         <div><h2>Create Account</h2></div>
         
-        <div><form action="signup_confirm.php" onsubmit="return submit();" method="POST">
+        <div><form id="signup_form" action="signup_confirm.php" method="POST">
             <table>
                 <tr>
                     <td>
@@ -77,6 +75,8 @@
         <div><button type="button" onclick="window.location.assign('index.php')">
             Return to Login
         </button></div>
+        
+        <script type="text/javascript" src="new_account_submit.js"></script>
     
     </body>
     
