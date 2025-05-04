@@ -4,6 +4,16 @@
     session_unset();
     
     session_destroy();
+    
+    if ($_GET["error"] === "true")
+    {
+        $hidden = "";
+    }
+    
+    else
+    {
+        $hidden = "class='hidden'";
+    }
 ?>
 <!DOCTYPE html>
 
@@ -18,10 +28,14 @@
     </head>
 
     <body>
-        <div><h1 style="padding-top: 4vh" >Conway's Game of Life</h1></div>
+        <div><h1>Conway's Game of Life</h1></div>
         
-        <div class="vertical-stack-center">
-        <form class="vertical-stack-center">
+        <div <?= $hidden ?>>
+            <h2>Invalid Information - Please Try Again</h2>
+            
+        </div>
+        
+        <div><form action="user_page.php" method="POST">
             <label for="username">Username</label><br>
             
             <input type="text" id="username" name="username" required><br>
@@ -32,10 +46,12 @@
             
             <input type="submit" value="Enter Simulation">
             
-        </form>
-
-        <button type="button" onclick="window.location.assign('create_account.php')">Create Account</button>
-        </div>    
+        </form></div>
+        
+        <div><button type="button" onclick="window.location.assign('create_account.php')">
+            Create Account
+        </button></div>
+    
     </body>
     
 </html>
