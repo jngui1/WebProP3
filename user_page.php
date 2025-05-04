@@ -30,10 +30,32 @@
                 exit();
             }
             
+            else if($row["isBanned"] === "1")
+            {
+                header("Location: index.php?banned=true");
+            
+                exit();
+            }
+            
+            else if($row["isSuspended"] === "1")
+            {
+                header("Location: index.php?suspended=true");
+            
+                exit();
+            }
+            
             else
             {
                 $_SESSION["userID"] = $row["userID"];
                 $_SESSION["username"] = $_POST["username"];
+                $_SESSION["isAdmin"] = $row["isAdmin"];
+            }
+            
+            if($row["isAdmin"] === "1")
+            {
+                header("Location: admin_page.php");
+            
+                exit();
             }
         }
         
@@ -104,6 +126,12 @@
             
         </div>
         
+        <div>
+          <button type="button" onclick="window.location.assign('index.php')">
+            Sign Out
+          </button>
+        </div>
+
         <script type="text/javascript" src="user_actions.js"></script>
         
     </body>
