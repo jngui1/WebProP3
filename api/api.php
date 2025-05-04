@@ -12,26 +12,41 @@ $json = file_get_contents("php://input");
 // echo $json;
 
 $object = json_decode($json);
-$move = $object->move;
-$cells = $object->cells;
+$method = $object->method;
 
-// $move = true;
-// $cells = [
-//     [0, 0, 0],
-//     [0, 1, 1],
-//     [0, 1, 1]
-// ];
-$MAXROW = count($cells);
-$MAXCOLUMN = count($cells[0]);
-if ($move != 0) {
+
+
+if ($method === "move") {
+    $move = $object->move;
+    $cells = $object->cells;
+
+    $MAXROW = count($cells);
+    $MAXCOLUMN = count($cells[0]);
+
     for ($i = 0; $i < $move; $i++) {
         $cells = generate_next();
     }
-    echo json_encode($cells);
-} else {
-    $returnStatement = [[5, 5, 5]];
-    echo json_encode($returnStatement);
+    echo json_encode(["cells" => $cells]);
+} else if ($method === "start_session") {
+    session_start();
+
+    $username = $object->username;
+    if (!($_SESSION["username"])) {
+        $_SESSION["username"] = $username;
+        $_SESSION["simulations"] = 0;
+    }
+    echo json_encode(["code" => 0]);
+    
+} else if ($method === "get_session") {
+    echo json_encode(["username" => $_SESSION["username"]]);
+} else if ($method === "end_session") {
+    session_start();
+    session_unset();
+    session_destroy();
+
+    echo json_encode(["code" => 0]);
 }
+
 function generate_next(): array
 {
     global $MAXROW, $MAXCOLUMN;

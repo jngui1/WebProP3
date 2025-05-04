@@ -33,3 +33,10 @@ header {
   font-weight: bold;
   font-size: 50px;
 }
+.inputField {
+  display: flex;
+  flex-direction: column;
+  width: 33vw;
+  margin: 0 auto;
+  
+}

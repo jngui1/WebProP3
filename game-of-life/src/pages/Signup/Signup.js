@@ -1,6 +1,13 @@
 import "./Signup.css";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { sqlRequest } from "../../commons/commons";
 function Signup() {
-    function signUp(formData) {
+    const [hidden, setHidden] = useState(true);
+    const navigate = useNavigate();
+
+    function handleSignUp(formData) {
+        setHidden(true);
         const username = formData.get("username");
         const password = formData.get("password");
         const email = formData.get("email");
@@ -8,13 +15,46 @@ function Signup() {
         const confirmPassword = formData.get("c_password");
         const confirmEmail = formData.get("c_email");
         //TODO parse username and password
-        alert(`Username: ${username}, Password: ${password}, Email: ${email}, 
-             Confirm User: ${confirmUsername}, Confirm Password: ${confirmPassword}, Confirm Email: ${confirmEmail}`);
+        if (username !== confirmUsername) {
+            alert("Usernames do not match!");
+        } else if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+        } else if (email !== confirmEmail) {
+            alert("Emails do not match!");
+        } else {
+            sqlRequest(
+                {
+                    method: "add",
+                    username: username,
+                    password: password,
+                    email: email,
+                },
+                handleResponse
+            );
+        }
     }
+    function handleResponse(response) {
+        switch (response.code) {
+            case 0:
+                navigate("/signup_success", { replace: true });
+                break;
+            case 1:
+                alert("An unknown error has occured.");
+                break;
+            case 2:
+                setHidden(false);
+                break;
+            default:
+                console.log(response);
+                break;
+        }
+    }
+    
     return (
         <>
             <h3>Create Account</h3>
-            <form action={signUp}>
+            <p hidden={hidden}>Username is already in use!</p>
+            <form action={handleSignUp}>
                 <div className="formGrid">
                     <div className="inputField">
                         <p>Username</p>
@@ -43,7 +83,9 @@ function Signup() {
                 </div>
                 <button type="submit">Sign Up</button>
             </form>
-            <button>Return to Login</button>
+            <Link to="/">
+                <button>Return to Login</button>
+            </Link>
         </>
     );
 }

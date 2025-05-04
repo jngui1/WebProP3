@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import "whatwg-fetch";
 import "./Simulation.css";
-// type PHPQuery = {
-//     move: int;
-//     cells: list[list[int]]
-// };
+import { apiRequest } from "../../commons/commons";
+import { Navigate, useNavigate } from "react-router-dom";
 
-
-function Simulation({ numberRows, numberColumns }) {
+function Simulation({ numberRows = 4, numberColumns = 5 }) {
     // TODO remove hardcoded numberRows and numberColumns once login page functionality finished.
     const [cells, setCells] = useState(
-        Array.from(Array(4), (_) => Array(4).fill(0))
+        Array.from(Array(numberRows), (_) => Array(numberColumns).fill(0))
     );
+    const navigate = useNavigate();
     const [generationCount, setGenerationCount] = useState(0);
     const gridLayout = (
-        <table class="centered">
+        <table className="centered">
             <tbody>
                 {cells.map((row, i) => (
-                    <tr>
+                    <tr key={i}>
                         {row.map((_, j) => (
                             <td
+                                key={`${i}-${j}`}
                                 value={cells[i][j]}
                                 className="cell"
                                 style={{
@@ -28,8 +27,7 @@ function Simulation({ numberRows, numberColumns }) {
                                         : "white",
                                 }}
                                 onClick={() => handleClick(i, j)}
-                            >
-                            </td>
+                            ></td>
                         ))}
                     </tr>
                 ))}
@@ -53,26 +51,28 @@ function Simulation({ numberRows, numberColumns }) {
         setCells(nextCells);
     }
     function nextGeneration() {
-        phpRequest(
+        apiRequest(
             {
+                method: "move",
                 move: 1,
                 cells: cells,
             },
             function (response) {
                 setGenerationCount(generationCount + 1);
-                setCells(response);
+                setCells(response.cells);
             }
         );
     }
     function next23Generations() {
-        phpRequest(
+        apiRequest(
             {
+                method: "move",
                 move: 23,
                 cells: cells,
             },
             function (response) {
                 setGenerationCount(generationCount + 23);
-                setCells(response);
+                setCells(response.cells);
             }
         );
     }
@@ -80,32 +80,27 @@ function Simulation({ numberRows, numberColumns }) {
     function stop() {}
     function reset() {
         setGenerationCount(0);
-        setCells(Array.from(Array(4), (_) => Array(4).fill(0)));
+        setCells(
+            Array.from(Array(numberRows), (_) => Array(numberColumns).fill(0))
+        );
     }
-    function logout() {}
-    function phpRequest(query, func, ...args) {
-        fetch(
-            `https://codd.cs.gsu.edu/~baladeselu1/WebPro/projects/3/api.php`,
-            {
-                method: "POST",
-                headers: {},
-                body: JSON.stringify(query),
-            }
-        )
-            .then((res) => res.json())
-            .then((response) => func(response));
+    function logout() {
+        apiRequest({ method: "end_session" }, function end_task(response) {
+            navigate("/");
+        });
     }
+
     return (
         <>
             <h1>Conway's Game of Life</h1>
             <p>Generation #{generationCount}</p>
             {gridLayout}
-            <button onclick={start}>Start Game</button>
-            <button onclick={stop}>Stop Game</button>
+            <button onClick={start}>Start Game</button>
+            <button onClick={stop}>Stop Game</button>
             <button onClick={nextGeneration}>Next Generation</button>
             <button onClick={next23Generations}>+23 Generations</button>
-            <button onclick={reset}>Reset</button>
-            <button onclick={logout}>Logout</button>
+            <button onClick={reset}>Reset</button>
+            <button onClick={logout}>Logout</button>
         </>
     );
 }
