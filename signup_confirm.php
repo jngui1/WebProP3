@@ -78,15 +78,15 @@
     </head>
 
     <body>
-        <div><h2>
+        <div class="vertical-stack-center"><h2>
             <?= $message ?><br>
         </h2></div>
         
-        <div><button type="button" <?= $hidden ?> onclick="window.location.assign('create_account.php')">
+        <div class="vertical-stack-center"><button type="button" <?= $hidden ?> onclick="window.location.assign('create_account.php')">
             Retry Account Creation
         </button></div>
         
-        <div><button type="button" onclick="window.location.assign('index.php')">
+        <div class="vertical-stack-center"><button type="button" onclick="window.location.assign('index.php')">
             Return to Login
         </button></div>
         

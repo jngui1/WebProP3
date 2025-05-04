@@ -13,7 +13,7 @@
     <body>
         <div><h2>Create Account</h2></div>
         
-        <div><form id="signup_form" action="signup_confirm.php" method="POST">
+        <div class="vertical-stack-center"><form id="signup_form" action="signup_confirm.php" method="POST" class="vertical-stack-center">
             <table>
                 <tr>
                     <td>
@@ -72,7 +72,7 @@
         
         </form></div>
         
-        <div><button type="button" onclick="window.location.assign('index.php')">
+        <div class="vertical-stack-center"><button type="button" onclick="window.location.assign('index.php')">
             Return to Login
         </button></div>
         
