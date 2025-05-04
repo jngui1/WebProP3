@@ -3,14 +3,17 @@ import "whatwg-fetch";
 
 function Cell({ value, onCellClick }) {
     return (
-        <div style={{ width: "100%", height: "100%" }}>
+        <div style={{ width: "100%", height: "100%", display: "flex" }}>
             <button
                 style={{
                     width: "100%",
                     height: "100%",
                     backgroundColor: value == 1 ? "black" : "white",
                     border: "1px solid black",
+                    borderRadius: "0px",
                     boxShadow: "none",
+                    padding: "0px",
+                    margin: "0px",
                 }}
                 onClick={onCellClick}
             ></button>
@@ -101,7 +104,8 @@ export default function Grid({width, height}) {
                                     flex: "1",
                                     display: "flex",
                                     alignItems: "stretch",
-                                    justifyContent: "stretch"
+                                    justifyContent: "stretch",
+                                    borderRadius: "0px",
                                 }}
                             >
                                 <Cell
