@@ -126,11 +126,11 @@
             
         </div>
         
-        
-        
-        <div><button type="button" onclick="window.location.assign('index.php')">
+        <div>
+          <button type="button" onclick="window.location.assign('index.php')">
             Sign Out
-        </button></div>
+          </button>
+        </div>
 
         <script type="text/javascript" src="user_actions.js"></script>
         
