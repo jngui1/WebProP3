@@ -28,7 +28,7 @@
     </head>
 
     <body>
-        <div><h1>Conway's Game of Life</h1></div>
+        <div><h1 id="#header">Conway's Game of Life</h1></div>
         
         <div <?= $hidden ?>>
             <h2>Invalid Information - Please Try Again</h2>
