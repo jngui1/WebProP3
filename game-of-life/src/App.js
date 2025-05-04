@@ -1,9 +1,9 @@
 import "./App.css";
-import { Link } from "react-router-dom";
-import Grid from "./pages/Grid/Grid";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup/Signup";
 import Home from "./pages/Home/Home";
+import Simulation from "./pages/Simulation/Simulation";
+import Dashboard from "./pages/Dashboard/Dashboard";
 function App() {
     return (
         <div className="App">
@@ -12,13 +12,10 @@ function App() {
                     {/* The Routes decides which component to show based on the current URL.*/}
                     <Route path="/" element={<Home/>}/>
                     <Route path="/signup" element={<Signup/>} />
-                </Routes>
+                    <Route path="/simulation" element={<Simulation/>} />
+                    <Route path="/dashboard" element={<Dashboard/>}/>
+                    </Routes>
             </Router>
-
-            {/* <Link to="/signup">
-                <button variant="outlined">Sign up</button>
-            </Link> */}
-            {/* <Grid numberRows={7} numberColumns={5} /> */}
         </div>
     );
 }

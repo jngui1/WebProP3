@@ -1,0 +1,7 @@
+.formGrid {
+    display: grid;
+    width: 50%;
+    grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+    grid-auto-flow: column;
+    margin: 0 auto;
+}
