@@ -33,8 +33,7 @@
         $error_message = "Root accounts cannot be moderated";
     }
     
-    // When adding to your CODD files, use your GSU Username
-    $db_username = "username";
+    require_once("db_username.php");
     
     $conn = new mysqli("localhost", $db_username, $db_username, $db_username);
     
