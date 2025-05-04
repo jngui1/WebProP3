@@ -1,23 +1,24 @@
-import logo from "./logo.svg";
 import "./App.css";
-
-import Grid from "./components/Grid/Grid";
+import { Link } from "react-router-dom";
+import Grid from "./pages/Grid/Grid";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import Signup from "./pages/Signup/Signup";
+import Home from "./pages/Home/Home";
 function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>Hello</p>
-                <Grid CellNumber={5}></Grid>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <Router>
+                <Routes>
+                    {/* The Routes decides which component to show based on the current URL.*/}
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/signup" element={<Signup/>} />
+                </Routes>
+            </Router>
+
+            {/* <Link to="/signup">
+                <button variant="outlined">Sign up</button>
+            </Link> */}
+            {/* <Grid numberRows={7} numberColumns={5} /> */}
         </div>
     );
 }
