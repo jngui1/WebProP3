@@ -27,7 +27,8 @@ export default function Grid({width, height}) {
     // }
 
     function getPHP() {
-        fetch(`http://localhost:3000/api/demo.php`, {
+        // Replace [parent_folder] with directory containing demo.php
+        fetch(`https://codd.cs.gsu.edu/[parent_folder]/demo.php`, {
             method: "POST",
             headers: {},
             body: JSON.stringify({
