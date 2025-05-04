@@ -1,6 +1,7 @@
 {
   "name": "game-of-life",
   "version": "0.1.0",
+  "homepage": "https://codd.cs.gsu.edu/[parent_folder]/grid",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
