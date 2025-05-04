@@ -93,6 +93,10 @@
             </script>
             
         </div>
+        
+        <div><button type="button" onclick="window.location.assign('grid/index.html')">
+            Begin Simulation
+        </button></div>
 
     </body>
 
