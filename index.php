@@ -35,18 +35,20 @@
             
         </div>
         
-        <div><form action="user_page.php" method="POST">
-            <label for="username">Username</label><br>
+        <div class="vertical-stack-center">
+            <form class="vertical-stack-center" action="user_page.php" method="POST">
+                <label for="username">Username</label><br>
+                
+                <input type="text" id="username" name="username" required><br>
+                
+                <label for="password">Password</label><br>
+                
+                <input type="password" id="password" name="password" required><br>
+                
+                <input type="submit" value="Enter Simulation">
             
-            <input type="text" id="username" name="username" required><br>
-            
-            <label for="password">Password</label><br>
-            
-            <input type="password" id="password" name="password" required><br>
-            
-            <input type="submit" value="Enter Simulation">
-            
-        </form></div>
+            </form>
+        </div>
         
         <div><button type="button" onclick="window.location.assign('create_account.php')">
             Create Account
