@@ -18,9 +18,10 @@
     </head>
 
     <body>
-        <div><h1>Conway's Game of Life</h1></div>
+        <div><h1 style="padding-top: 4vh" >Conway's Game of Life</h1></div>
         
-        <div><form action="user_page.php" method="POST">
+        <div class="vertical-stack-center">
+        <form class="vertical-stack-center">
             <label for="username">Username</label><br>
             
             <input type="text" id="username" name="username" required><br>
@@ -31,12 +32,10 @@
             
             <input type="submit" value="Enter Simulation">
             
-        </form></div>
-        
-        <div><button type="button" onclick="window.location.assign('create_account.php')">
-            Create Account
-        </button></div>
-    
+        </form>
+
+        <button type="button" onclick="window.location.assign('create_account.php')">Create Account</button>
+        </div>    
     </body>
     
 </html>

@@ -26,8 +26,8 @@ session_start();
               <p>Simulations Ran: #</p>
        </div>
 
-       <div>
-              <form onsubmit="inviteFriend(event)">
+       <div style="">
+              <form onsubmit="inviteFriend(event)" class="vertical-stack-center">
                      <label for="email">Friend's email</label>
                      <input type="email" id="email" name="email" required>
                      <input type="submit" value="Invite Friend">
