@@ -22,6 +22,8 @@
         email VARCHAR(1000) NOT NULL,
         passwordHash VARCHAR(1000) NOT NULL,
         isAdmin BOOL NOT NULL,
+        isSuspended BOOL NOT NULL,
+        isBanned BOOL NOT NULL,
         PRIMARY KEY (userID)
     );";
     
@@ -31,8 +33,8 @@
         
         $hashed_admin_password = password_hash("root", PASSWORD_BCRYPT);
     
-        $add_admin_SQL = "INSERT INTO Users (username, email, passwordHash, isAdmin)
-            VALUES ('root', 'none', '$hashed_admin_password', 1);";
+        $add_admin_SQL = "INSERT INTO Users (username, email, passwordHash, isAdmin, isSuspended, isBanned)
+            VALUES ('root', 'none', '$hashed_admin_password', 1, 0, 0);";
             
         $conn->query($add_admin_SQL);
     }
@@ -49,8 +51,8 @@
         
         $message = "Welcome, " . $_POST["username"] . "!<br>Your Account Has Been Created!";
         
-        $add_user_SQL = "INSERT INTO Users (username, email, passwordHash, isAdmin)
-            VALUES ('" . $_POST["username"] . "', '" . $_POST["email"] . "', '$hashed_password', 0);";
+        $add_user_SQL = "INSERT INTO Users (username, email, passwordHash, isAdmin, isSuspended, isBanned)
+            VALUES ('" . $_POST["username"] . "', '" . $_POST["email"] . "', '$hashed_password', 0, 0, 0);";
             
         $conn->query($add_user_SQL);
         
