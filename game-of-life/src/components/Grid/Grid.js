@@ -1,38 +1,53 @@
 import React, { useState } from "react";
 import "whatwg-fetch";
-
+import "./Grid.css";
 function Cell({ value, onCellClick }) {
     return (
         <button
-            style={{ backgroundColor: value ? "white" : "black" }}
+            style={{ backgroundColor: value ? "black" : "white" }}
             className="cell"
             onClick={onCellClick}
         >
-            {value}
         </button>
     );
 }
 export default function Grid({ CellNumber }) {
-    // constructor(props) {
-    //     super(props);
-    //     this.getPHP = this.getPHP.bind(this);
-    // }
-    // TODO remove 3, and set it to CellNumber
     const [Cells, setCells] = useState(
-        Array.from(Array(3).fill(0), () => new Array(3))
+        Array.from(Array(CellNumber), (_) => Array(CellNumber).fill(0))
+    );
+    const gridLayout = (
+        <div className="grid">
+            {Cells.map((row, i) => (
+                <div className="row">
+                    {row.map((_, j) => (
+                        <Cell
+                            value={Cells[i][j]}
+                            onCellClick={() => handleClick(i, j)} />
+                    ))}
+                </div>
+            ))}
+        </div>
     );
     console.log("Cells", Cells);
-    function handleClick(i, j) {
-        // Cells[i][j] ^= 1;
-        setCells([
-            [1, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0],
-        ]);
-        console.log(Cells[i][j] === 0);
+    function handleClick(rowIndex, colIndex) {
+        const nextCells = Cells.map((row, i) => {
+            if (i === rowIndex) {
+                return row.map((col, j) => {
+                    if (j === colIndex) {
+                        return col ^ 1;
+                    } else {
+                        return col;
+                    }
+                });
+            } else {
+                return row;
+            }
+        });
+        setCells(nextCells);
+        console.log(Cells[rowIndex][colIndex] === 0);
     }
     function getPHP() {
-        fetch(`http://localhost:3000/api/demo.php`, {
+        fetch(`http://localhost:3000/api/api.php`, {
             method: "POST",
             headers: {},
             body: JSON.stringify({
@@ -46,56 +61,11 @@ export default function Grid({ CellNumber }) {
                 console.log(response);
             });
     }
-    // TODO set the grid to a bariable width anheight based on cellNumber
     return (
         <>
             <p className="mainText">JUST REACT</p>
             <button onClick={getPHP}>Load</button>
-
-            <div className="board-row">
-                <button
-                    style={{ backgroundColor: Cells[0][0] ? "white" : "black" }}
-                    className="cell"
-                    onClick={handleClick.bind((0, 0))}
-                ></button>
-                <Cell
-                    value={Cells[0][1]}
-                    onCellClick={() => handleClick(0, 1)}
-                />
-                <Cell
-                    value={Cells[0][2]}
-                    onCellClick={() => handleClick(0, 2)}
-                />
-            </div>
-            <div className="board-row">
-                <Cell
-                    value={Cells[1][0]}
-                    onCellClick={() => handleClick(1, 0)}
-                />
-                <Cell
-                    value={Cells[1][1]}
-                    onCellClick={() => handleClick(1, 1)}
-                />
-                <Cell
-                    value={Cells[1][2]}
-                    onCellClick={() => handleClick(1, 2)}
-                />
-            </div>
-            <div className="board-row">
-                <Cell
-                    value={Cells[2][0]}
-                    onCellClick={() => handleClick(2, 0)}
-                />
-                <Cell
-                    value={Cells[2][1]}
-                    onCellClick={() => handleClick(2, 1)}
-                />
-                <Cell
-                    value={Cells[2][2]}
-                    onCellClick={() => handleClick(2, 2)}
-                />
-            </div>
-            <p>{Cells[0][0]}</p>
+            {gridLayout}
         </>
     );
 }

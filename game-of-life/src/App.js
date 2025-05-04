@@ -8,7 +8,7 @@ function App() {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>Hello</p>
-                <Grid CellNumber={4}></Grid>
+                <Grid CellNumber={5}></Grid>
                 <a
                     className="App-link"
                     href="https://reactjs.org"

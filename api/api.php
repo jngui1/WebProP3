@@ -11,5 +11,6 @@ error_reporting(0);
 
 $json = file_get_contents("php://input");
 echo $json;
+
 // $response = array("success" => true, "message" => $content);
 // echo json_encode($_POST);

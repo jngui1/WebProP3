@@ -1,0 +1,11 @@
+.row {
+    display: flex;
+}
+.grid {
+    display: flex;
+    flex-direction: column;
+}
+.cell {
+    height: 40px;
+    aspect-ratio: 1;
+}
