@@ -1,40 +1,54 @@
 <?php
     session_start();
 
-    // When adding to your CODD files, use your GSU Username
-    $db_username = "username";
-    
-    $conn = new mysqli("localhost", $db_username, $db_username, $db_username);
-    
-    $check_for_user_SQL = "SELECT * FROM Users WHERE username = '" . $_POST["username"] . "';";
-    
-    $result = $conn->query($check_for_user_SQL);
-    
-    if ($result->num_rows < 1)
+    if (!($_SESSION["userID"]))
     {
-        header("Location: index.php?error=true");
+        // When adding to your CODD files, use your GSU Username
+        $db_username = "username";
         
-        exit();
-    }
-    
-    else
-    {
-        $row = $result->fetch_assoc();
+        $conn = new mysqli("localhost", $db_username, $db_username, $db_username);
         
-        if(password_verify($_POST["password"], $row["passwordHash"]) === false)
+        $check_for_user_SQL = "SELECT * FROM Users WHERE username = '" . $_POST["username"] . "';";
+        
+        $result = $conn->query($check_for_user_SQL);
+        
+        if ($result->num_rows < 1)
         {
             header("Location: index.php?error=true");
-        
+            
             exit();
         }
         
         else
         {
-            $_SESSION["username"] = $_POST["username"];
+            $row = $result->fetch_assoc();
+            
+            if(password_verify($_POST["password"], $row["passwordHash"]) === false)
+            {
+                header("Location: index.php?error=true");
+            
+                exit();
+            }
+            
+            else
+            {
+                $_SESSION["userID"] = $row["userID"];
+                $_SESSION["username"] = $_POST["username"];
+            }
         }
+        
+        $conn->close();
     }
     
-    $conn->close();
+    if ($_GET["added_wish"] === "true")
+    {
+        $wish_added_alert = "<script>alert('Your wish has been added to the wishlist.');</script>";
+    }
+    
+    else
+    {
+        $wish_added_alert = "";
+    }
 ?>
 <!DOCTYPE html>
 
@@ -45,6 +59,8 @@
         <meta charset="UTF-8">
 
         <link rel="stylesheet" type="text/css" href="layout.css">
+        
+        <?= $wish_added_alert ?>
 
     </head>
 
@@ -59,41 +75,35 @@
         </div>
 
         <div>
-            <form onsubmit="inviteFriend(event)">
+            <form id="invite_form">
                 <label for="email">Friend's email</label>
+                
                 <input type="email" id="email" name="email" required>
+                
                 <input type="submit" value="Invite Friend">
+                
             </form>
-
-            <script>
-                function inviteFriend(event)
-                {
-                    event.preventDefault();
-                    const email = document.getElementById('email').value;
-                    let url = window.location.href;
-                    url = url.substring(0, url.lastIndexOf('/'));
-                    window.location.href = `mailto:${email}?subject=Play Conway's Game of Life&body=Hello! You can play the Game of Life at ${url}/index.php`;
-                }
-            </script>
-        </div>
-
-        <div>
-            <form>
-                <label for="wishlist">Wishlist Item</label>
-                <input type="text" id="wishlist" name="wishlist" required>
-                <input type="button" onclick="addWishlist()" value="Add to Wishlist">
-            </form>
-
-            <script>
-                function addWishlist()
-                {
-                    const item = document.getElementById('wishlist').value;
-                    alert(`not implemented yet, item: ${item}`);
-                }
-            </script>
             
         </div>
 
+        <div>
+            <form id="wishlist_form" action="add_wishlist.php" method="POST">
+                <label for="wishlist">Wishlist Item</label>
+                
+                <input type="text" id="wishlist" name="wishlist" required>
+                
+                <input type="submit" value="Add to Wishlist">
+                
+            </form>
+            
+        </div>
+        
+        <div><button type="button" onclick="window.location.assign('grid/index.html')">
+            Begin Simulation
+        </button></div>
+
+        <script type="text/javascript" src="user_actions.js"></script>
+        
     </body>
 
 </html>
