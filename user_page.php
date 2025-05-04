@@ -35,6 +35,13 @@
                 $_SESSION["userID"] = $row["userID"];
                 $_SESSION["username"] = $_POST["username"];
             }
+            
+            if($row["username"] === "root")
+            {
+                header("Location: admin_page.php");
+            
+                exit();
+            }
         }
         
         $conn->close();

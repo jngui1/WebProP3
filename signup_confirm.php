@@ -10,21 +10,31 @@
         die("Connection failed: " . $conn->connect_error);
     }
     
-    /*$drop_table_SQL = "DROP TABLE Users;";
+    /*
+    $drop_table_SQL = "DROP TABLE Users;";
     
-    $conn->query($drop_table_SQL);*/
+    $conn->query($drop_table_SQL);
+    */
     
     $create_table_SQL = "CREATE TABLE Users(
         userID INT UNSIGNED NOT NULL AUTO_INCREMENT,
         username VARCHAR(1000) NOT NULL,
         email VARCHAR(1000) NOT NULL,
         passwordHash VARCHAR(1000) NOT NULL,
+        isAdmin BOOL NOT NULL,
         PRIMARY KEY (userID)
     );";
     
     try
     {
         $conn->query($create_table_SQL);
+        
+        $hashed_admin_password = password_hash("root", PASSWORD_BCRYPT);
+    
+        $add_admin_SQL = "INSERT INTO Users (username, email, passwordHash, isAdmin)
+            VALUES ('root', 'none', '$hashed_admin_password', 1);";
+            
+        $conn->query($add_admin_SQL);
     }
     
     catch (mysqli_sql_exception $error){/*echo $conn->error;*/}
@@ -39,8 +49,8 @@
         
         $message = "Welcome, " . $_POST["username"] . "!<br>Your Account Has Been Created!";
         
-        $add_user_SQL = "INSERT INTO Users (username, email, passwordHash)
-            VALUES ('" . $_POST["username"] . "', '" . $_POST["email"] . "', '$hashed_password');";
+        $add_user_SQL = "INSERT INTO Users (username, email, passwordHash, isAdmin)
+            VALUES ('" . $_POST["username"] . "', '" . $_POST["email"] . "', '$hashed_password', 0);";
             
         $conn->query($add_user_SQL);
         
