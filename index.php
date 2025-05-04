@@ -50,13 +50,15 @@
             </form>
         </div>
         
-        <div><button type="button" onclick="window.location.assign('create_account.php')">
-            Create Account
-        </button></div>
-        
-        <div><button type="button" onclick="window.location.assign('creators_page.html')">
-            Link to Creator's Page
-        </button></div>
+        <div class="vertical-stack-center">
+            <button type="button" onclick="window.location.assign('create_account.php')">
+                Create Account
+            </button>
+            
+            <button type="button" onclick="window.location.assign('creators_page.html')">
+                Link to Creator's Page
+            </button>
+        </div>
     
     </body>
 </html>
