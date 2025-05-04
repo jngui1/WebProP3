@@ -91,13 +91,13 @@
 
         <div></div>
 
-        <div>
-            <p>Play Time: # hours</p>
-            <p>Simulations Ran: #</p>
+        <div class="vertical-stack-center" style="margin-top: 50px;">
+            <h3>Play Time: # hours</h3>
+            <h3>Simulations Ran: #</h3>
         </div>
 
-        <div>
-            <form id="invite_form">
+        <div class="vertical-stack" style="position: absolute; top: 600px; left: 350px;">
+            <form id="invite_form" class="vertical-stack-center">
                 <label for="email">Friend's email</label>
                 
                 <input type="email" id="email" name="email" required>
@@ -107,9 +107,15 @@
             </form>
             
         </div>
+        
+        <div style="position: absolute; top: 735px; left: 800px">
+            <button type="button" onclick="window.location.assign('grid/index.html')">
+                Begin Simulation
+            </button>
+        </div>
 
-        <div>
-            <form id="wishlist_form" action="add_wishlist.php" method="POST">
+        <div class ="vertical-stack" style="position: absolute; top: 600px; right: 350px;">
+            <form id="wishlist_form" action="add_wishlist.php" method="POST" class="vertical-stack-center">
                 <label for="wishlist">Wishlist Item</label>
                 
                 <input type="text" id="wishlist" name="wishlist" required>
@@ -120,9 +126,7 @@
             
         </div>
         
-        <div><button type="button" onclick="window.location.assign('grid/index.html')">
-            Begin Simulation
-        </button></div>
+        
         
         <div><button type="button" onclick="window.location.assign('index.php')">
             Sign Out
