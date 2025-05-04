@@ -1,6 +1,6 @@
 <?php
-    // When adding to your CODD files, use youe GSU Username
-    $db_username = "jngui1";
+    // When adding to your CODD files, use your GSU Username
+    $db_username = "username";
     
     $conn = new mysqli("localhost", $db_username, $db_username, $db_username);
     
@@ -10,7 +10,51 @@
         die("Connection failed: " . $conn->connect_error);
     }
     
-    $new_username = "[username]";
+    /*$drop_table_SQL = "DROP TABLE Users;";
+    
+    $conn->query($drop_table_SQL);*/
+    
+    $create_table_SQL = "CREATE TABLE Users(
+        userID INT UNSIGNED NOT NULL AUTO_INCREMENT,
+        username VARCHAR(1000) NOT NULL,
+        email VARCHAR(1000) NOT NULL,
+        passwordHash VARCHAR(1000) NOT NULL,
+        PRIMARY KEY (userID)
+    );";
+    
+    try
+    {
+        $conn->query($create_table_SQL);
+    }
+    
+    catch (mysqli_sql_exception $error){/*echo $conn->error;*/}
+    
+    $check_for_user_SQL = "SELECT * FROM Users WHERE username = '" . $_POST["username"] . "';";
+    
+    $result = $conn->query($check_for_user_SQL);
+    
+    if ($result->num_rows <= 0)
+    {
+        $hashed_password = password_hash($_POST["password"], PASSWORD_BCRYPT);
+        
+        $message = "Welcome, " . $_POST["username"] . "!<br>Your Account Has Been Created!";
+        
+        $add_user_SQL = "INSERT INTO Users (username, email, passwordHash)
+            VALUES ('" . $_POST["username"] . "', '" . $_POST["email"] . "', '$hashed_password');";
+            
+        $conn->query($add_user_SQL);
+        
+        $hidden = "class='hidden'";
+    }
+    
+    else
+    {
+        $message = "The username " . $_POST["username"] . " is already taken";
+        
+        $hidden = "";
+    }
+    
+    $conn->close();
 ?>
 <html lang="en">
     <head>
@@ -24,8 +68,12 @@
 
     <body>
         <div><h2>
-            Welcome, <?= $new_username ?>!<br>Your Account Has Been Created
+            <?= $message ?><br>
         </h2></div>
+        
+        <div><button type="button" <?= $hidden ?> onclick="window.location.assign('create_account.php')">
+            Retry Account Creation
+        </button></div>
         
         <div><button type="button" onclick="window.location.assign('index.php')">
             Return to Login

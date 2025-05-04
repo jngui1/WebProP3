@@ -4,6 +4,16 @@
     session_unset();
     
     session_destroy();
+    
+    if ($_GET["error"] === "true")
+    {
+        $hidden = "";
+    }
+    
+    else
+    {
+        $hidden = "class='hidden'";
+    }
 ?>
 <!DOCTYPE html>
 
@@ -18,25 +28,35 @@
     </head>
 
     <body>
-        <div><h1>Conway's Game of Life</h1></div>
+        <div><h1 id="#header">Conway's Game of Life</h1></div>
         
-        <div><form action="user_page.php" method="POST">
-            <label for="username">Username</label><br>
+        <div <?= $hidden ?>>
+            <h2>Invalid Information - Please Try Again</h2>
             
-            <input type="text" id="username" name="username" required><br>
+        </div>
+        
+        <div class="vertical-stack-center">
+            <form class="vertical-stack-center" action="user_page.php" method="POST">
+                <label for="username">Username</label><br>
+                
+                <input type="text" id="username" name="username" required><br>
+                
+                <label for="password">Password</label><br>
+                
+                <input type="password" id="password" name="password" required><br>
+                
+                <input type="submit" value="Enter Simulation">
             
-            <label for="password">Password</label><br>
-            
-            <input type="password" id="password" name="password" required><br>
-            
-            <input type="submit" value="Enter Simulation">
-            
-        </form></div>
+            </form>
+        </div>
         
         <div><button type="button" onclick="window.location.assign('create_account.php')">
             Create Account
         </button></div>
+        
+        <div><button type="button" onclick="window.location.assign('creators_page.html')">
+            Link to Creator's Page
+        </button></div>
     
     </body>
-    
 </html>

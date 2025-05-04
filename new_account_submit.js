@@ -1,7 +1,8 @@
-function submit()
+let signup_form = document.getElementById("signup_form");
+
+function submit(event)
 {
     let username = document.getElementById("username").value;
-    alert(username);
     let confirm_username = document.getElementById("confirm_username").value;
     
     let email = document.getElementById("email").value;
@@ -14,25 +15,22 @@ function submit()
     {
         alert("Usernames do not match");
         
-        return false;
+        event.preventDefault();
     }
     
     else if (email !== confirm_email)
     {
         alert("Emails do not match");
         
-        return false;
+        event.preventDefault();
     }
     
     else if (password !== confirm_password)
     {
         alert("Passwords do not match");
         
-        return false;
-    }
-    
-    else
-    {
-        return true;
+        event.preventDefault();
     }
 }
+
+signup_form.addEventListener("submit", function(event){submit(event);});
