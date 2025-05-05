@@ -82,7 +82,7 @@
 
     </head>
 
-    <body>
+    <body class="vertical-stack-center">
         <div><h1>Admin Dashboard</h1></div>
         
         <div id="hours_graph"></div>
@@ -114,7 +114,7 @@
         
         <div <?= $hide_error ?>><p><?= $error_message ?></p></div>
         
-        <div><form action="moderate_user.php" method="POST">
+        <div><form action="moderate_user.php" method="POST" class="vertical-stack-center">
             <label for="username">Username</label>
             
             <input type="text" id="username" name="username" required>
@@ -127,7 +127,7 @@
             
         </form></div>
         
-        <div><button type="button" onclick="window.location.assign('index.php')">
+        <div class="vertical-stack-center"><button type="button" onclick="window.location.assign('index.php')">
             Sign Out
         </button></div>
         
