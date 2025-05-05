@@ -152,20 +152,25 @@ function Simulation({ numberRows = 15, numberColumns = 15 }) {
             <h1>Conway's Game of Life</h1>
             <p>Generation #{generationCount}</p>
             {gridLayout}
-            <div></div>
-            <button onClick={start}>Start Game</button>
-            <button onClick={next23Generations}>+23 Generations</button>
-            <button onClick={stop}>Stop Game</button>
-            <button onClick={reset}>Reset</button>
-            <button onClick={logout}>Logout</button>
-            <button onClick={nextGeneration}>Next Generation</button>
-            <select onChange={(e) => loadPattern(e.target.value)}>
-                <option value="">Select a Pattern</option>
-                <option value="glider">Glider</option>
-                <option value="blinker">Blinker</option>
-                <option value="toad">Toad</option>
-                <option value="boat">Boat</option>
-            </select>
+            <div className="vertical-stack-center" style={{ position: "absolute", bottom: "14.3vh", left: "20vw"}}>
+                <button onClick={start}>Start Game</button>
+                <button onClick={next23Generations}>+23 Generations</button>
+            </div>
+            <div className="vertical-stack-center" style={{ position: "absolute", bottom: "5vh", left: "44vw", right: "44vw", minWidth: "250px" }}>
+                <button onClick={stop}>Stop Game</button>
+                <button onClick={reset}>Reset</button>
+                <button onClick={logout}>Logout</button>
+            </div>
+            <div className="vertical-stack-center" style={{ position: "absolute", bottom: "17.8vh", right: "20vw"}}>
+                <button onClick={nextGeneration}>Next Generation</button>
+                <select onChange={(e) => loadPattern(e.target.value)}>
+                    <option value="">Load Pattern</option>
+                    <option value="glider">Glider</option>
+                    <option value="blinker">Blinker</option>
+                    <option value="toad">Toad</option>
+                    <option value="boat">Boat</option>
+                </select>
+            </div>
         </>
     );
 }

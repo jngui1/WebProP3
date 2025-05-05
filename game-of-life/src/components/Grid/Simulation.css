@@ -17,3 +17,7 @@ p {
     text-align: center;
     font-size: 2vh;
 }
+select {
+    margin: 0 auto;
+    font-size: 4vh;
+}
