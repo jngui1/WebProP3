@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "whatwg-fetch";
 import "./Simulation.css";
 import { apiRequest } from "../../commons/commons";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Simulation({ numberRows = 8, numberColumns = 8 }) {
     const [cells, setCells] = useState(
@@ -33,6 +33,10 @@ function Simulation({ numberRows = 8, numberColumns = 8 }) {
             </tbody>
         </table>
     );
+    const cellsRef = React.useRef(cells);
+    React.useEffect(() => {
+        cellsRef.current = cells;
+    }, [cells]);
     function handleClick(rowIndex, colIndex) {
         const nextCells = cells.map((row, i) => {
             if (i === rowIndex) {
@@ -54,10 +58,10 @@ function Simulation({ numberRows = 8, numberColumns = 8 }) {
             {
                 method: "move",
                 move: 1,
-                cells: cells,
+                cells: cellsRef.current,
             },
             function (response) {
-                setGenerationCount(generationCount + 1);
+                setGenerationCount(prevCount => prevCount + 1);
                 setCells(response.cells);
             }
         );
@@ -70,13 +74,24 @@ function Simulation({ numberRows = 8, numberColumns = 8 }) {
                 cells: cells,
             },
             function (response) {
-                setGenerationCount(generationCount + 23);
+                setGenerationCount(prevCount => prevCount + 23);
                 setCells(response.cells);
             }
         );
     }
-    function start() {}
-    function stop() {}
+    const intervalRef = React.useRef(null);
+    // calls nextGeneration every third of a second
+    function start() {
+        if (intervalRef.current === null) {
+            intervalRef.current = setInterval(() => {
+                nextGeneration();
+            }, 333);
+        }
+    }
+    function stop() {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+    }
     function reset() {
         setGenerationCount(0);
         setCells(
