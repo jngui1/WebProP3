@@ -65,7 +65,9 @@
             $banned = "Yes";
         }
         
-        $table_data .= "<tr><td>" . $row["userID"] . "</td><td>" . $row["username"] . "</td><td>" . $row["email"] . "</td><td>$suspended</td><td>$banned</td><td>#</td><td>#</td></tr>";
+        $table_data .= "<tr><td>" . $row["userID"] . "</td><td>" .
+            $row["username"] . "</td><td>" . $row["email"] .
+            "</td><td>$suspended</td><td>$banned</td></tr>";
     }
 ?>
 <!DOCTYPE html>
@@ -99,10 +101,6 @@
                     <th>Suspended?</th>
                     
                     <th>Banned?</th>
-                    
-                    <th>Play Time (hours)</th>
-                    
-                    <th>Simulations Ran</th>
                     
                 </tr>
                 
