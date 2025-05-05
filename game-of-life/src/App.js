@@ -1,12 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-import Grid from "./components/Grid/Grid";
+import Simulation from "./components/Grid/Simulation";
 function App() {
     return (
         <div className="App">
-            <h1>grid</h1>
-            <Grid width={8} height={15} />
+            <Simulation numberRows={8} numberColumns={18} />
         </div>
     );
 }

@@ -1,0 +1,15 @@
+.row {
+    display: flex;
+}
+.grid {
+    display: flex;
+    flex-direction: column;
+}
+.cell {
+    height: 40px;
+    width: 40px;
+    border: 1px solid #000000;
+}
+.centered {
+    margin: 0 auto;
+}
