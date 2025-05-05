@@ -4,7 +4,7 @@ import Simulation from "./components/Grid/Simulation";
 function App() {
     return (
         <div className="App">
-            <Simulation numberRows={8} numberColumns={18} />
+            <Simulation numberRows={15} numberColumns={15} />
         </div>
     );
 }
