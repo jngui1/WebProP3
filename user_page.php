@@ -108,7 +108,7 @@
         </div>
         
         <div class="vertical-stack-center">
-            <button type="button" onclick="window.location.assign('grid/index.html')">
+            <button type="button" onclick="window.location.assign('build/index.html')">
                 Begin Simulation
             </button>
         </div>
