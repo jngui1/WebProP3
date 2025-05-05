@@ -95,7 +95,7 @@
             <h3>Simulations Ran: #</h3>
         </div>
 
-        <div class="vertical-stack" style="position: absolute; top: 600px; left: 350px;">
+        <div class="vertical-stack" style="position: absolute; bottom: 10vh; left: 15vw;">
             <form id="invite_form" class="vertical-stack-center">
                 <label for="email">Friend's email</label>
                 
@@ -107,13 +107,13 @@
             
         </div>
         
-        <div style="position: absolute; top: 735px; left: 800px">
+        <div class="vertical-stack-center">
             <button type="button" onclick="window.location.assign('grid/index.html')">
                 Begin Simulation
             </button>
         </div>
 
-        <div class ="vertical-stack" style="position: absolute; top: 600px; right: 350px;">
+        <div class ="vertical-stack" style="position: absolute; bottom: 10vh; right: 15vw;">
             <form id="wishlist_form" action="add_wishlist.php" method="POST" class="vertical-stack-center">
                 <label for="wishlist">Wishlist Item</label>
                 
@@ -125,7 +125,7 @@
             
         </div>
         
-        <div>
+        <div class="vertical-stack-center">
           <button type="button" onclick="window.location.assign('index.php')">
             Sign Out
           </button>
