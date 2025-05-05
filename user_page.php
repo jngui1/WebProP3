@@ -88,13 +88,6 @@
     <body>
         <div><h1><?= $_SESSION["username"] ?>'s Dashboard</h1></div>
 
-        <div></div>
-
-        <div class="vertical-stack-center" style="margin-top: 50px;">
-            <h3>Play Time: # hours</h3>
-            <h3>Simulations Ran: #</h3>
-        </div>
-
         <div class="vertical-stack" style="position: absolute; bottom: 10vh; left: 15vw;">
             <form id="invite_form" class="vertical-stack-center">
                 <label for="email">Friend's email</label>
